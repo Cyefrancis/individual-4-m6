@@ -10,3 +10,6 @@ hay dos grupos de usuarios los admins y los usuario normales
 los admins tienes permiso para todo
 
 y los usuarios solo tienen persmiso de lectura 
+
+desde la pagina de admins se puede asignar un grupos para cada usuario no di esta opcion en registro por que no tiene mucho
+sentido dar esta opcion a cualquier usuario
