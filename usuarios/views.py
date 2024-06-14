@@ -20,11 +20,11 @@ def register(request):
                 user = form.save()
                 UserProfile.objects.create(user=user)  # Crea un perfil vacío al registrar
                 try:
-                    group = Group.objects.get(name='Operarios')
+                    group = Group.objects.get(name='User')
                     user.groups.add(group)
                     messages.success(request, 'Registro exitoso. Bienvenido!')
                 except ObjectDoesNotExist:
-                    messages.warning(request, 'El grupo Operarios no existe y no fue asignado.')
+                    messages.warning(request, 'El grupo User no existe y no fue asignado.')
                 return redirect(reverse('login'))
         else:
             messages.error(request, 'Por favor corrija los errores en el formulario.')
@@ -51,7 +51,7 @@ def profile(request):
     else:
         user_form = CustomUserCreationForm(instance=request.user)
         profile_form = UserProfileForm(instance=profile)
-    return render(request, '/profile.html', {'user_form': user_form, 'profile_form': profile_form })
+    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form })
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
