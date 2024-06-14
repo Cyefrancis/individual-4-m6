@@ -25,7 +25,7 @@ def register(request):
                     messages.success(request, 'Registro exitoso. Bienvenido!')
                 except ObjectDoesNotExist:
                     messages.warning(request, 'El grupo Operarios no existe y no fue asignado.')
-                return redirect(reverse('home'))
+                return redirect(reverse('login'))
         else:
             messages.error(request, 'Por favor corrija los errores en el formulario.')
     else:
