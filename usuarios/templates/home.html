@@ -1,0 +1,13 @@
+{% extends 'base_nav.html' %}
+
+{% block content %}
+<h1>Bienvenido(a), {{ request.user.username }}</h1>
+<p>Estas logeado en el sistema</p>
+
+<!-- Botón para cerrar sesión-->
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger">Cerrar Sesión</button>
+</form>
+
+{% endblock%}

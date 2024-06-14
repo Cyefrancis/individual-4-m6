@@ -1,0 +1,50 @@
+{% extends "base_nav.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <h2>Editar Perfil</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Campos del formulario de usuario (CustomUserChangeForm) -->
+        {% for field in user_form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field|add_class:"form-control" }}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        
+        <!-- Campo de imagen del formulario de perfil (UserProfileForm) -->
+        <div class="mb-3">
+            <label for="{{ profile_form.image.id_for_label }}">Imagen de perfil:</label>
+            {{ profile_form.image|add_class:"form-control-file" }}
+            {% for error in profile_form.image.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <!-- Añade campos adicionales de profile_form si necesitas -->
+        {% for field in profile_form %}
+            {% if field.name != 'image' %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field|add_class:"form-control" }}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+    </form>
+    {% if profile.image %}
+    <div class="mt-3">
+        <h4>Imagen actual:</h4>
+        <img src="{{ profile.image.url }}" alt="Perfil" class="img-thumbnail">
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

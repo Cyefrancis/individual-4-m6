@@ -1,0 +1,137 @@
+# Ignore the virtual environment directory
+my_venv/
+
+# Ignore Python compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pyd
+*.pyo
+*.pyc
+
+# Ignore Django migration files
+**/migrations/
+
+# Ignore local environment settings
+.env
+*.local
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore Django secret key and settings
+**/settings_secret.py
+
+# Ignore compiled code
+*.so
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore static files
+staticfiles/
+media/
+
+# Ignore the node_modules directory (if you have frontend dependencies)
+node_modules/
+
+# Ignore backup files and editor-specific files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignore logs and coverage reports
+*.log
+*.coverage
+.coverage.*
+*.cover
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore mypy type checking files
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ignore IDEs and editors files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore other operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled code and build directories
+build/
+dist/
+*.egg-info/
+*.eggs/
+
+# Ignore pip file
+pip-log.txt
+
+# Ignore Yarn lock files
+yarn.lock
+.pnp.cjs
+.pnp.loader.mjs
+
+# Ignore deployment and CI/CD specific files
+*.dockerignore
+.docker-compose.yml
+Dockerfile
+*.stackdump
+
+# Ignore cache files
+*.egg-info/
+.eggs/
+.cache/
+
+# Ignore temporary files
+tmp/
+
+# Ignore backup files
+*.bak
+
+# Ignore pytest cache files
+.cache/
+.pytest_cache/
+
+# Ignore Tox generated files
+.tox/
+*.tox
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore celery and supervisor files
+celerybeat-schedule
+supervisord.log
+supervisord.pid
+my_venv
+# Ignore local test scripts
+test/
+
+# Ignore local .env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore Python egg files
+*.egg
+*.egg-info
+.eggs/
+MANIFEST
+
+# Ignore temporary files created by the system
+._*

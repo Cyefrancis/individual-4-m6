@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Control de Inventarios de Productos</title>
+
+    <!-- BEGIN: Estilos Css de Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- END: Estilos Css de Boostrap-->
+
+    <!-- BEGIN: FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- END: FONT AWESOME-->
+
+    <!-- BEGIN: Estilos personalizados Globales -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/global_style.css' %}"/>
+    <!-- END: Estilos personalizados Globales -->
+    
+    <!-- BEGIN: Estilos personalizados de las aplicaciones -->
+    {% block extra_css %}
+    {% endblock %}
+    <!-- END: Estilos personalizados de las aplicaciones -->
+
+  </head>
+  <body>
+    <!-- BEGIN: navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-custom-shadow">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'producto:index' %}">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'producto:index' %}">Home</a>
+            </li>
+            <!-- Puedes añadir más elementos aquí si lo necesitas -->
+          </ul>
+          <!-- Nombre del usuario y Botón de Cerrar Sesión -->
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if request.user.profile.image %}
+                  <img src="{{ request.user.profile.image.url }}" alt="Perfil" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                {% endif %}
+                {{ request.user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Perfil</a></li>
+                <li>
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END: navbar-->
+    <div class="container mt-4">
+      {% comment %} <h3 class="text-capitalize mb-5"> Hola, {{ request.user.first_name }} Bienvenido</h3> {% endcomment %}
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!-- Begin: JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- End: JavaScript de Bootstrap -->
+    <!-- Begin SweetAlert 2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- End SweetAlert 2-->
+
+    <script>
+      const deleteForms = document.querySelectorAll('form[id^="deleteForm-"]');
+      
+      deleteForms.forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          const formId = this.id;
+          Swal.fire({
+            title: '¿Estás seguro que deseas eliminar el producto?',
+            text: "!No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+            if(result.isConfirmed) {
+              // document.querySelector(`#${formId}`).submit();
+              document.getElementById(formId).submit();
+            }
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html>
