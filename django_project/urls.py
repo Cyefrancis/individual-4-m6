@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuarios/', include('usuarios.urls')),
-    path('', RedirectView.as_view(url=reverse_lazy('login'), permanent=False))
+    path('', RedirectView.as_view(url=reverse_lazy('landing'), permanent=False))
 ]
 
 if settings.DEBUG:

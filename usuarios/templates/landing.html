@@ -1,0 +1,43 @@
+{% extends 'landing_nav.html' %}
+{% block content %}
+<div class="hero-section d-flex align-items-center justify-content-center">
+    <div class="text-center">
+        <h1>Welcome to Our Landing Page</h1>
+        <p class="lead">This is a simple hero section to catch the user's attention.</p>
+        <a href="{% url "register" %}" class="btn btn-primary btn-lg">Register</a>
+        <a href="{% url "login" %}" class="btn btn-primary btn-lg">Log in</a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="feature-icon mb-3">
+                <i class="bi bi-lightbulb"></i>
+            </div>
+            <h3>Feature One</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-icon mb-3">
+                <i class="bi bi-gear"></i>
+            </div>
+            <h3>Feature Two</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-icon mb-3">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <h3>Feature Three</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light text-center py-4">
+    <p>&copy; 2024 Your Company. All Rights Reserved.</p>
+</footer>
+{% endblock  %}

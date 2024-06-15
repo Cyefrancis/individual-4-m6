@@ -12,6 +12,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
+def landing(request):
+    return render(request, 'landing.html')
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
