@@ -2,9 +2,14 @@
 
 {% block content %}
   <h2>Tareas Pendientes</h2>
-  
-  <a href="{% url "task_create" %}" class="btn btn-primary">Agregar Tarea</a>
-  
+
+  <!-- Formulario de filtro -->
+  <form method="get" class="mb-3">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+    <a href="{% url 'tarea_create' %}" class="btn btn-success">Agregar Tarea</a>
+  </form>
+
   <table class="table">
     <thead>
       <tr>
@@ -15,13 +20,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for tarea in tasks %}
+      {% for tarea in tareas %}
       <tr>
         <td>{{ tarea.title }}</td>
         <td>{{ tarea.description }}</td>
         <td>{{ tarea.deadline }}</td>
         <td>
-          <a href="{% url 'ver_tarea' tarea.id %}" class="btn btn-info">Ver</a>
+          <a href="{% url 'task_detail' tarea.id %}" class="btn btn-info">Ver</a>
         </td>
       </tr>
       {% empty %}

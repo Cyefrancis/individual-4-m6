@@ -1,0 +1,53 @@
+{% extends 'nav_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-3">{{ task.title }}</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Descripción</h5>
+            <p class="card-text">{{ task.description }}</p>
+
+            <h5 class="card-title">Fecha de Creación</h5>
+            <p class="card-text">{{ task.creation_date|date:"d M Y H:i" }}</p>
+
+            <h5 class="card-title">Fecha de Vencimiento</h5>
+            <p class="card-text">{{ task.deadline|date:"d M Y" }}</p>
+
+            <h5 class="card-title">Estado</h5>
+            <p class="card-text">{{ task.get_state_display }}</p>
+
+            <h5 class="card-title">Categoría</h5>
+            <p class="card-text">
+                {% if task.category %}
+                    {{ task.category.name }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+
+            <h5 class="card-title">Etiquetas</h5>
+            <p class="card-text">
+                {% if task.tags.all %}
+                    {% for tag in task.tags.all %}
+                        <span class="badge bg-info text-dark">{{ tag.nombre }}</span>
+                    {% endfor %}
+                {% else %}
+                    No tiene etiquetas asignadas.
+                {% endif %}
+            </p>
+
+            <div class="mt-4">
+                <a href="{% url 'task_edit' task.id %}" class="btn btn-warning">Editar</a>
+                <form action="{% url 'task_delete' task.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'tareas_pendientes_list' %}" class="btn btn-secondary mt-3">Volver a la Lista de Tareas</a>
+</div>
+{% endblock %}

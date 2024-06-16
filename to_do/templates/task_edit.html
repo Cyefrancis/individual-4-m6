@@ -1,0 +1,13 @@
+{% extends 'nav_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Editar Tarea</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="{% url 'task_detail' task.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,4 +1,13 @@
 {% extends 'nav_base.html' %}
+
+
 {% block content %}
-<h1>Aqui para crear la tarea</h1>
+  <h2>{{ title }}</h2>
+  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+  
 {% endblock  %}
