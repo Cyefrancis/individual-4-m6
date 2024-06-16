@@ -80,7 +80,7 @@ def task_edit(request, task_id):
     return render(request, 'task_form.html', {'form': form, 'task': task})
 
 
-# Vista para eliminar una tarea existente
+
 def task_delete(request, task_id):
     task = get_object_or_404(Tarea, id=task_id, user=request.user.profile)
     if request.method == 'POST':
