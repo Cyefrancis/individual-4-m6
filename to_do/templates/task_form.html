@@ -1,13 +1,36 @@
 {% extends 'nav_base.html' %}
 
-
 {% block content %}
-  <h2>{{ title }}</h2>
-  
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Guardar</button>
-  </form>
-  
-{% endblock  %}
+<div class="container mt-5">
+    <h2>{{ task.id|default_if_none:'Crear Tarea' }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title">Título</label>
+            {{ form.title }}
+        </div>
+        <div class="mb-3">
+            <label for="description">Descripción</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="deadline">Fecha de Vencimiento</label>
+            {{ form.deadline }}
+        </div>
+        <div class="mb-3">
+            <label for="state">Estado</label>
+            {{ form.state }}
+        </div>
+        <div class="mb-3">
+            <label for="category">Categoría</label>
+            {{ form.category }}
+        </div>
+        <div class="mb-3">
+            <label for="etiquetas">Etiquetas</label>
+            {{ form.etiquetas }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% if task %}{% url 'task_detail' task.id %}{% else %}{% url 'task_list' %}{% endif %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

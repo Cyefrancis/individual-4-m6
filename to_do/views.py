@@ -74,7 +74,7 @@ def task_edit(request, task_id):
         form = TareaForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('task_detail', task_id=task.id)
+            return redirect('task_edit', task_id=task.id)
     else:
         form = TareaForm(instance=task)
     return render(request, 'task_form.html', {'form': form, 'task': task})
