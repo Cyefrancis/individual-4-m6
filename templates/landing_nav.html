@@ -40,7 +40,7 @@
             <!-- Puedes añadir más elementos aquí si lo necesitas -->
           </ul>
           <!-- Nombre del usuario y Botón de Cerrar Sesión -->
-          <ul class="navbar-nav">
+          {% comment %} <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if request.user.profile.image %}
@@ -56,7 +56,7 @@
                     <button type="submit" class="dropdown-item">Cerrar Sesión</button>
                   </form>
                 </li>
-              </ul>
+              </ul> {% endcomment %}
             </li>
           </ul>
         </div>
