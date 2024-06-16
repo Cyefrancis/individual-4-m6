@@ -34,8 +34,10 @@ class Tarea(models.Model):
         choices=STATE_CHOICES,
         default=PENDING
     )
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='created_tasks')
+    assigned_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='assigned_tasks', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-
+    etiquetas = models.ManyToManyField(Etiqueta, related_name='tareas', blank=True)  # Añadir la relación aquí
+    
     def __str__(self):
         return self.title

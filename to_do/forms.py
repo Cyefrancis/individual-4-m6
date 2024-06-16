@@ -1,5 +1,6 @@
 from django import forms
-from .models import Tarea, Category, Etiqueta
+from .models import Tarea, Category, Etiqueta,UserProfile
+from django.contrib.auth.models import User
 
 class TareaForm(forms.ModelForm):
     # Campos adicionales para filtros
@@ -30,9 +31,19 @@ class TareaForm(forms.ModelForm):
         label='Etiquetas'
     )
 
+    assigned_user = forms.ModelChoiceField(
+        queryset=UserProfile.objects.all(),
+        label='Asignar a',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+   
+   
+
     class Meta:
         model = Tarea
-        fields = ['title', 'description', 'deadline', 'state', 'category', 'etiquetas']  # Campos del modelo Tarea que queremos incluir en el formulario
+        fields = ['title', 'description', 'deadline', 'state', 'category', 'etiquetas', 'assigned_user']
         widgets = {
             'deadline': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
@@ -41,3 +52,4 @@ class TareaForm(forms.ModelForm):
         super(TareaForm, self).__init__(*args, **kwargs)
         self.fields['category'].queryset = Category.objects.all()
         self.fields['etiquetas'].queryset = Etiqueta.objects.all()
+        self.fields['assigned_user'].queryset = UserProfile.objects.all()

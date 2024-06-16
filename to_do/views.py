@@ -15,6 +15,7 @@ def task_detail(request, task_id):
 @login_required
 def tarea_create_edit(request, tarea_id=None):
     tarea_instance = None
+
     if tarea_id:
         tarea_instance = get_object_or_404(Tarea, id=tarea_id, user=request.user.profile)
     
@@ -22,10 +23,20 @@ def tarea_create_edit(request, tarea_id=None):
         form = TareaForm(request.POST, instance=tarea_instance)
         if form.is_valid():
             tarea = form.save(commit=False)
-            # Obtener el perfil de usuario asociado al usuario actual
-            tarea.user = request.user.profile  # Asigna el UserProfile actual a la tarea
+            assigned_user = form.cleaned_data.get('assigned_user')
+            
+            if assigned_user:
+                tarea.assigned_user = assigned_user
+            else:
+                # Asignar el usuario actual si no se selecciona ninguno
+                tarea.assigned_user = request.user.profile
+            
+            # Asignar el usuario que creó la tarea
+            if not tarea_instance:  # Solo asignar al crear una nueva tarea
+                tarea.user = request.user.profile
+            
             tarea.save()
-            form.save_m2m()  # Guarda las relaciones many-to-many (etiquetas)
+            form.save_m2m()  # Guardar relaciones many-to-many
             return redirect('task_detail', task_id=tarea.id)
     else:
         form = TareaForm(instance=tarea_instance)

@@ -27,14 +27,24 @@
                 {% endif %}
             </p>
 
-            <h5 class="card-title">Etiquetas</h5>
+            <h5 class="card-title">Prioridad</h5>
             <p class="card-text">
-                {% if task.tags.all %}
-                    {% for tag in task.tags.all %}
-                        <span class="badge bg-info text-dark">{{ tag.nombre }}</span>
+                {% if task.etiquetas.exists %}
+                    {% for etiqueta in task.etiquetas.all %}
+                        <span class="badge bg-info text-dark">{{ etiqueta.nombre }}</span>
                     {% endfor %}
                 {% else %}
                     No tiene etiquetas asignadas.
+                {% endif %}
+            </p>
+
+            <!-- Nuevo bloque para mostrar el usuario asignado -->
+            <h5 class="card-title">Asignado a</h5>
+            <p class="card-text">
+                {% if task.assigned_user %}
+                    {{ task.assigned_user.user.username }}
+                {% else %}
+                    No asignado
                 {% endif %}
             </p>
 

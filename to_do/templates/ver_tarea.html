@@ -7,6 +7,7 @@
   <p><strong>Observacion:</strong> {{ tarea.description }}</p>
   <p><strong>Fecha de Vencimiento:</strong> {{ tarea.deadline }}</p>
   <p><strong>Estado:</strong> {{ tarea.state }}</p>
+  
   <!-- Otras detalles según sea necesario -->
   
   <a href="{% url 'editar_tarea' tarea.id %}" class="btn btn-warning">Editar</a>
